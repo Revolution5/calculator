@@ -30,3 +30,24 @@ function operate(operator, first, second) {
             break;
     }
 }
+
+function displayOnScreen(value) {
+    const screen = document.querySelector(".screen");
+    screen.textContent = value;
+}
+
+
+let input = ""
+const btns = Array.from(document.querySelectorAll(".btn"));
+btns.forEach(btn => {
+    btn.addEventListener("click", function(e) {
+        //if the button is a number, put its content in input and display it
+        if(btn.classList.contains("num")){
+            input += btn.textContent;
+            displayOnScreen(input)
+        }
+        //if the button is an operator, save that as a seperate input
+    })
+})
+
+
