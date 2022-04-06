@@ -11,6 +11,9 @@ function multiply(first, second) {
 }
 
 function divide(first, second) {
+    if(second == 0) {
+        return "Nope";
+    }
     return first / second;
 }
 
@@ -25,11 +28,11 @@ function operate(operator, first, second) {
             result = subtract(first, second).toString();
             return result;
             break;
-        case "*":
+        case "x":
             result = multiply(first, second).toString();
             return result;
             break;
-        case "/":
+        case "÷":
             result = divide(first, second).toString();
             return result;
             break;
@@ -60,9 +63,23 @@ numBtns.forEach(numBtn => {
 const oprBtns = Array.from(document.querySelectorAll(".opr"));
 oprBtns.forEach(oprBtn => {
     oprBtn.addEventListener("click", function(e) {
-        opr = oprBtn.textContent;
-        firstNum = parseInt(input)
-        input = "";
+        //if there is a firstNum, opr, and input, make input the secondNum and 
+        //operate on opr, firstNum, secondNum, then display and store result in firstNum, put new operator in opr
+        //clear secondNum and input, have new input be secondNum and repeat process
+        if(opr.length > 0 && firstNum > 0) {
+            secondNum = parseInt(input);
+            let result = operate(opr, firstNum, secondNum);
+            displayOnScreen(result);
+            firstNum = parseInt(result);
+            opr = oprBtn.textContent;
+            secondNum = 0;
+            input = "";
+        }
+        else {
+            opr = oprBtn.textContent;
+            firstNum = parseInt(input)
+            input = "";
+        }
     })
 })
 
@@ -78,8 +95,11 @@ clearbtn.addEventListener("click", function(e) {
 const eqlBtn = document.querySelector(".eql");
 eqlBtn.addEventListener("click", function(e) {
     secondNum = parseInt(input);
+    let result = operate(opr, firstNum, secondNum);
+    displayOnScreen(result);
+    firstNum = parseInt(result);
+    secondNum = 0;
     input = "";
-    displayOnScreen(operate(opr, firstNum, secondNum));
 })
 
 
