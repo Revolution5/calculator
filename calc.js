@@ -78,7 +78,9 @@ oprBtns.forEach(oprBtn => {
         }
         else {
             opr = oprBtn.textContent;
-            firstNum = Number(input)
+            if(input != "") {
+                firstNum = Number(input)
+            }
             input = "";
         }
     })
@@ -95,12 +97,15 @@ clearbtn.addEventListener("click", function(e) {
 
 const eqlBtn = document.querySelector(".eql");
 eqlBtn.addEventListener("click", function(e) {
-    secondNum = Number(input);
-    let result = operate(opr, firstNum, secondNum);
-    displayOnScreen(result);
-    firstNum = Number(result);
-    secondNum = 0;
-    input = "";
+    if(opr != "") {
+        secondNum = Number(input);
+        let result = operate(opr, firstNum, secondNum);
+        displayOnScreen(result);
+        firstNum = Number(result);
+        secondNum = 0;
+        input = "";
+        opr = "";
+    }
 })
 
 const decBtn = document.querySelector(".dec");
