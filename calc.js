@@ -42,34 +42,38 @@ let firstNum = 0;
 let secondNum = 0;
 let opr = "";
 
+const numBtns = Array.from(document.querySelectorAll(".num"));
+numBtns.forEach(numBtn => {
+    numBtn.addEventListener("click", function(e) {
+        input += numBtn.textContent;
+        if(input.length > 10) {
+            input = input.substring(0, 10);
+         }
+        displayOnScreen(input);
+     })
+ })
 
-function getFirstNumber() {
-    const numBtns = Array.from(document.querySelectorAll(".num"));
-    numBtns.forEach(numBtn => {
-        numBtn.addEventListener("click", function(e) {
-            input += numBtn.textContent;
-            if(input.length > 10) {
-                input = input.substring(0, 10);
-            }
-            displayOnScreen(input);
-            firstNum = parseInt(input)
-        })
-    })
-    return firstNum;
-}
+ 
+ const oprBtns = Array.from(document.querySelectorAll(".opr"));
+ oprBtns.forEach(oprBtn => {
+     oprBtn.addEventListener("click", function(e) {
+         opr = oprBtn.textContent;
+         firstNum = parseInt(input)
+         input = "";
+     })
+ })
 
-function activateClearButton() {
-    const clearbtn = document.querySelector(".clear");
-    clearbtn.addEventListener("click", function(e) {
-        input = "";
-        firstNum = 0;
-        secondNum = 0;
-        opr = "";
-        displayOnScreen(0);
-    })
-}
+const clearbtn = document.querySelector(".clear");
+clearbtn.addEventListener("click", function(e) {
+    input = "";
+    firstNum = 0;
+    secondNum = 0;
+    opr = "";
+    displayOnScreen(0);
+})
 
-getFirstNumber();
-activateClearButton();
+
+
+
 
 
