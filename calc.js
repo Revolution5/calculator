@@ -53,6 +53,7 @@ const numBtns = Array.from(document.querySelectorAll(".num"));
 numBtns.forEach(numBtn => {
     numBtn.addEventListener("click", function(e) {
         input += numBtn.textContent;
+        //limit length of input to prevent overflowing the screen
         if(input.length > 10) {
             input = input.substring(0, 10);
          }
@@ -67,17 +68,17 @@ oprBtns.forEach(oprBtn => {
         //operate on opr, firstNum, secondNum, then display and store result in firstNum, put new operator in opr
         //clear secondNum and input, have new input be secondNum and repeat process
         if(opr.length > 0 && firstNum > 0) {
-            secondNum = parseInt(input);
+            secondNum = Number(input);
             let result = operate(opr, firstNum, secondNum);
             displayOnScreen(result);
-            firstNum = parseInt(result);
+            firstNum = Number(result);
             opr = oprBtn.textContent;
             secondNum = 0;
             input = "";
         }
         else {
             opr = oprBtn.textContent;
-            firstNum = parseInt(input)
+            firstNum = Number(input)
             input = "";
         }
     })
@@ -94,15 +95,19 @@ clearbtn.addEventListener("click", function(e) {
 
 const eqlBtn = document.querySelector(".eql");
 eqlBtn.addEventListener("click", function(e) {
-    secondNum = parseInt(input);
+    secondNum = Number(input);
     let result = operate(opr, firstNum, secondNum);
     displayOnScreen(result);
-    firstNum = parseInt(result);
+    firstNum = Number(result);
     secondNum = 0;
     input = "";
 })
 
-
-
-
-
+const decBtn = document.querySelector(".dec");
+decBtn.addEventListener("click", function(e) {
+    //only 1 decimal allowed in a number
+    if (input.indexOf(".") == -1) {
+        input += ".";
+        displayOnScreen(input);
+    }
+})
