@@ -15,18 +15,23 @@ function divide(first, second) {
 }
 
 function operate(operator, first, second) {
+    let result = "";
     switch(operator) {
         case "+":
-            add(first, second);
+            result = add(first, second).toString();
+            return result;
             break;
         case "-":
-            subtract(first, second);
+            result = subtract(first, second).toString();
+            return result;
             break;
         case "*":
-            multiply(first, second);
+            result = multiply(first, second).toString();
+            return result;
             break;
         case "/":
-            divide(first, second);
+            result = divide(first, second).toString();
+            return result;
             break;
     }
 }
@@ -35,7 +40,6 @@ function displayOnScreen(value) {
     const screen = document.querySelector(".screen");
     screen.textContent = value;
 }
-
 
 let input = "";
 let firstNum = 0;
@@ -52,16 +56,15 @@ numBtns.forEach(numBtn => {
         displayOnScreen(input);
      })
  })
-
  
- const oprBtns = Array.from(document.querySelectorAll(".opr"));
- oprBtns.forEach(oprBtn => {
-     oprBtn.addEventListener("click", function(e) {
-         opr = oprBtn.textContent;
-         firstNum = parseInt(input)
-         input = "";
-     })
- })
+const oprBtns = Array.from(document.querySelectorAll(".opr"));
+oprBtns.forEach(oprBtn => {
+    oprBtn.addEventListener("click", function(e) {
+        opr = oprBtn.textContent;
+        firstNum = parseInt(input)
+        input = "";
+    })
+})
 
 const clearbtn = document.querySelector(".clear");
 clearbtn.addEventListener("click", function(e) {
@@ -72,6 +75,12 @@ clearbtn.addEventListener("click", function(e) {
     displayOnScreen(0);
 })
 
+const eqlBtn = document.querySelector(".eql");
+eqlBtn.addEventListener("click", function(e) {
+    secondNum = parseInt(input);
+    input = "";
+    displayOnScreen(operate(opr, firstNum, secondNum));
+})
 
 
 
